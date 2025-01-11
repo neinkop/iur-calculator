@@ -35,14 +35,29 @@ class DynamischeInvestitionsrechnung:
         self.__endwert = self.__kapitalwert*((1+self.kzf)**self.laufzeit)
 
     def dyn_barwert_os(self, jahr, cashflow, kzf):
+        """Berechnung eines Rentenbarwertes ohne Steuern
+
+        Returns:
+            float: Rentenbarwert ohne Steuern in Euro
+        """
         if kzf == None: kzf = self.kzf
         return cashflow/((1+kzf)**jahr)
     
     def dyn_barwert_ms(self, jahr, cashflow, abschreibung, kzf, restbuchwert=0):
+        """Berechnung eines Rentenbarwertes mit Steuern
+
+        Returns:
+            float: Rentenbarwert mit Steuern in Euro
+        """
         if kzf == None: kzf = self.kzf
         return(cashflow-self.steuersatz*(cashflow-abschreibung-restbuchwert))/((1+kzf)**jahr)
             
     def dyn_kapitalwert_os(self, kzf=None):
+        """Berechnung eines Kapitalwert ohne Steuern
+
+        Returns:
+            float: Kapitalwert ohne Steuern in Euro
+        """
         if kzf == None: kzf = self.kzf
 
         kapitalwert = 0-self.anschaffungsauszahlungen
@@ -53,6 +68,11 @@ class DynamischeInvestitionsrechnung:
         return kapitalwert
 
     def dyn_kapitalwert_ms(self, kzf=None):
+        """Berechnung eines Kapitalwert mit Steuern
+
+        Returns:
+            float: Kapitalwert mit Steuern in Euro
+        """
         if kzf == None: kzf = self.kzf
         kapitalwert = 0-self.anschaffungsauszahlungen
         restbuchwert = self.anschaffungsauszahlungen
@@ -69,9 +89,19 @@ class DynamischeInvestitionsrechnung:
         return round(kapitalwert, 2)
 
     def dyn_annuitaet(self):
+        """Berechnung der Annuität
+
+        Returns:
+            float: Annuität in Euro
+        """
         return round(self.__kapitalwert*((((1+self.kzf)**self.laufzeit)*self.kzf)/(((1+self.kzf)**self.laufzeit)-1)), 2)
 
     def dyn_baldwin(self):
+        """Berechnung des Baldwin-Zinssatzes
+
+        Returns:
+            float: Baldwin-Zinssatz in Prozent
+        """
         return round(((
             (
             (self.__etragswert*((1+self.kzf)**self.laufzeit))
@@ -82,6 +112,11 @@ class DynamischeInvestitionsrechnung:
             , 2)
    
     def dyn_ableitung_kapitalwert(self, kzf=None):
+        """Berechnung ...
+
+        Returns:
+            float: 
+        """
         if kzf == None: kzf = self.kzf
         kapitalwert = 0-self.anschaffungsauszahlungen
         jahr = 1
@@ -90,7 +125,12 @@ class DynamischeInvestitionsrechnung:
             jahr = jahr +1
         return kapitalwert
     
-    def dyn_izf_os(self):  
+    def dyn_izf_os(self):
+        """Berechnung des Internen-Zinsfußes ohne Steuern
+
+        Returns:
+            float: Interner-Zinsfuß ohne Steuern in Prozent
+        """
         kapitalwert = self.dyn_kapitalwert_os()
         if kapitalwert > 0:
             izf = self.kzf
@@ -103,6 +143,11 @@ class DynamischeInvestitionsrechnung:
         return round(izf*100, 3)
 
     def dyn_izf_ms(self):
+        """Berechnung des Internen-Zinsfußes mit Steuern
+
+        Returns:
+            float: Interner-Zinsfuß mit Steuern in Prozent
+        """
         izf = 0.0
         kapitalwert = self.dyn_kapitalwert_ms()
         if kapitalwert > 0:
@@ -120,6 +165,11 @@ class DynamischeInvestitionsrechnung:
         return round(izf*100, 2)
     
     def dyn_amortisationsdauer_os (self):
+        """Berechnung der dynamischen Amortisationsdauer ohne Steuern
+
+        Returns:
+            float: dynamische Amortisationsdauer ohne Steuern in Jahren
+        """
         kum_cf = 0.0-self.anschaffungsauszahlungen
         jahr = 1
         while kum_cf < 0:
@@ -134,6 +184,11 @@ class DynamischeInvestitionsrechnung:
         return round(ad_jahre, 2)
     
     def dyn_amortisationsdauer_ms (self):
+        """Berechnung der dynamischen Amortisationsdauer mit Steuern
+
+        Returns:
+            float: dynamische Amortisationsdauer mit Steuern in Jahren
+        """
         kum_cf = 0.0-self.anschaffungsauszahlungen
         jahr = 1
         restbuchwert = self.anschaffungsauszahlungen

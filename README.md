@@ -1,5 +1,7 @@
 # IUR-Calculator
-**The Small IUR Cost Calculator**  
+**The Small IUR Calculator**
+The project was implemented as part of an additional examination assignment in the module "Programming 1" with Prof. Dr. Andreas Biesdorf at Trier University of Applied Sciences.  
+The calculation of the key figures is based on the formula collection from the module "Internal Corporate and Investment Accounting" by Prof. Dr. Michael Keilus.
 
 ### Context and Problem Description ("Problem Space")  
 The profitability of investment projects is determined by various financial indicators. These indicators provide a foundation for economic decision-making and can sometimes be calculated manually. However, the effort required for the calculation varies significantly: while some indicators, such as the net present value, are relatively simple to compute, determining more complex values like the internal rate of return requires considerably more effort. In some cases, it is almost impossible to calculate these values accurately without computer-assisted methods.  

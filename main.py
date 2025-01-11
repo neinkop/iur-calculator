@@ -173,14 +173,16 @@ def dyn_ir():
                 while projekt2 > (len(dyn_ips)-1) or projekt2 == projekt1 or projekt2 < 0:
                     projekt2 = int(input("Wähle das 2. Projekt: "))-1
                 
-                projekt1 = dyn_ips[projekt1]
-                projekt2 = dyn_ips[projekt2]
+                p1 = dyn_ips[projekt1]
+                p2 = dyn_ips[projekt2]
                 print("Projektvergleich: ")
-                print(''+91*'-')
-                print(f'{"Gewinn":^20} | {"Amortisation":^20} | {"EK-Rentabilität":^20} | {"GK-Rentabilität":^20}')
-                print(91*'-')
-                #print(f'{_Gewinn:^20} | {_Amortisation:^20} | {_EK_Rentabilität:^20} | {_GK_Rentabilität:^20}')
-                print(91*'-')
+                print(''+(180+26)*'-')
+                print(f'{"Name":^20} | {"Laufzeit":^20} | {"Kapitalwert":^20} | {"IZF":^20} | {"Baldwin":^20} | {"dyn. Amortd.":^20} | {"Annuität":^20} | {"Etragswert":^20} | {"Endwert":^20}')
+                print((180+26)*'-')
+                print(f'{p1.name():^20} | {p1.laufzeit:^20} | {p1.kapitalwert():^20} | {p1.izf():^20} | {p1.baldwin():^20} | {p1.amortisationsdauer():^20} | {p1.annuitaet():^20} | {p1.etragswert():^20} | {p1.endwert():^20}')
+                print((180+26)*'-')
+                print(f'{p1.name():^20} | {p1.laufzeit:^20} | {p1.kapitalwert():^20} | {p1.izf():^20} | {p1.baldwin():^20} | {p1.amortisationsdauer():^20} | {p1.annuitaet():^20} | {p1.etragswert():^20} | {p1.endwert():^20}')
+                print((180+26)*'-')
                 option = input("Tippe eine beliebige Taste um zurück ins Menu zugelangen: ")
             elif option == len(dyn_ips)+2:
                 # Anlegen eines neuen Projektes
@@ -209,16 +211,12 @@ def dyn_ir():
                 start()
             elif 0 < option < int(len(dyn_ips))+1:
                 # Ausgabe des Projektes
-                dynir = dyn_ips[option-1]
-                print("--")
-                print("Kapitalwert: " + str(dynir.kapitalwert()))
-                print("Annuität: " + str(dynir.annuitaet()))
-                print("Endwert: " + str(dynir.endwert()))
-                print("Etragswert: " + str(dynir.etragswert()))
-                print("Baldwin-Zinssatz: " + str(dynir.baldwin()) + "%")
-                print("Interne Zinsfuß: " + str(dynir.izf()) + "%")
-                print("Dynamische Amortisationsdauer: " + str(dynir.amortisationsdauer()) + " Jahre")
-                print("--")
+                p1 = dyn_ips[option-1]
+                print(''+(180+26)*'-')
+                print(f'{"Name":^20} | {"Laufzeit":^20} | {"Kapitalwert":^20} | {"IZF":^20} | {"Baldwin":^20} | {"dyn. Amortd.":^20} | {"Annuität":^20} | {"Etragswert":^20} | {"Endwert":^20}')
+                print((180+26)*'-')
+                print(f'{p1.name():^20} | {p1.laufzeit:^20} | {p1.kapitalwert():^20} | {p1.izf():^20} | {p1.baldwin():^20} | {p1.amortisationsdauer():^20} | {p1.annuitaet():^20} | {p1.etragswert():^20} | {p1.endwert():^20}')
+                print((180+26)*'-')
                 dyn_ir()
 
     dyn_ir()
