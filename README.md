@@ -1,5 +1,6 @@
 # IUR-Calculator
 **The Small IUR Calculator**
+
 The project was implemented as part of an additional examination assignment in the module "Programming 1" with Prof. Dr. Andreas Biesdorf at Trier University of Applied Sciences.  
 The calculation of the key figures is based on the formula collection from the module "Internal Corporate and Investment Accounting" by Prof. Dr. Michael Keilus.
 
