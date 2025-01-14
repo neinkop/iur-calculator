@@ -112,7 +112,7 @@ class DynamischeInvestitionsrechnung:
             , 2)
    
     def dyn_ableitung_kapitalwert(self, kzf=None):
-        """Berechnung ...
+        """Ableitung der Kapitalwert-Funktion, nebenrechnung für IZF (Newton-Raphson verfahren)
 
         Returns:
             float: 
@@ -148,21 +148,16 @@ class DynamischeInvestitionsrechnung:
         Returns:
             float: Interner-Zinsfuß mit Steuern in Prozent
         """
-        izf = 0.0
-        kapitalwert = self.dyn_kapitalwert_ms()
+        kapitalwert = self.dyn_kapitalwert_os()
         if kapitalwert > 0:
             izf = self.kzf
         else:
-            izf = 0.0
-
-        while (abs(kapitalwert) > 0.0001):
-            kapitalwert = round(self.dyn_kapitalwert_ms(round(izf, 6)),5)
-            if kapitalwert < 0:
-                izf = round(izf - 0.000001, 6)
-            else:
-                izf = round(izf + 0.000001, 6)
-
-        return round(izf*100, 2)
+            izf = 0.00
+            
+        while abs(self.dyn_kapitalwert_os(izf)) > 0.00001:
+            izf = izf - (self.dyn_kapitalwert_os(izf))/(self.dyn_ableitung_kapitalwert(izf))
+            
+        return round(izf*100, 3)
     
     def dyn_amortisationsdauer_os (self):
         """Berechnung der dynamischen Amortisationsdauer ohne Steuern
